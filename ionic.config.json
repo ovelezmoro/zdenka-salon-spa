@@ -1,0 +1,7 @@
+{
+  "name": "zdenka-salon-spa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
