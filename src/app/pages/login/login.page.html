@@ -1,0 +1,37 @@
+<ion-content>
+
+  <ion-grid class="login-form">
+    <ion-row class="logo">
+      <ion-col size="12" class="logo-image"></ion-col>
+    </ion-row>
+    <ion-row class="content">
+      <ion-col size="12">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" class="login-btn">
+              <ion-button (click)="handleLoginButton()" shape="round" expand="full" color="primary">Login</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row class="footer">
+      <ion-col size="12">
+        <p>Aun no tienes cuenta? <span (click)="handleRegisterButton()">Registrase</span></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,68 @@
+<ion-content>
+  <ion-grid style="height: 100%; background-color: white;">
+    <ion-row size="12" style="font-size: 1.5rem;
+    padding: 0 1rem;
+    margin: 1rem 0;">
+      <ion-icon class="back-button" name="arrow-back-outline" (click)="handleBackButton()"></ion-icon>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <h1 style="margin: 0 0 1.5rem 0; font-weight: bold; text-align: center;">Crear nueva Cuenta</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 0.5rem;">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 0.5rem;">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="stacked">Apellidos</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 0.5rem;">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 0.5rem;">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 0.5rem;">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="stacked">Fecha Nacimiento</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: 0.5rem;">
+      <ion-col size="12">
+        <ion-button (click)="handleRegisterButton()" shape="round" expand="full" color="primary">Registarse</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="footer">
+      <ion-col size="12">
+        <p>Ya tienes cuenta? <span (click)="handleGotoLoginButton()">Ingresa</span></p>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

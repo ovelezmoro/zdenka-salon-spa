@@ -1,0 +1,106 @@
+<ion-content>
+  <div style="    background-color: white;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #80808059;">
+    <ion-toolbar class="toolbar">
+      <ion-buttons slot="start" (click)="handleBackButton()">
+        <ion-icon class="back-button" name="arrow-back-outline"></ion-icon>
+      </ion-buttons>
+      <ion-title>Reservar una Cita</ion-title>
+    </ion-toolbar>
+
+    <div class="stepper-wrapper">
+      <div class="stepper-item" [ngClass]="{ step: slideActive == 0, finish: slideActive > 0 }">
+        <div class="step-counter">
+          <ion-icon class="step-icon" name="checkmark-outline"></ion-icon>
+        </div>
+        <div class="step-name">Reservar Cita</div>
+      </div>
+      <div class="stepper-item" [ngClass]="{ step: slideActive == 1, finish: slideActive > 1 }">
+        <div class="step-counter">
+          <ion-icon class="step-icon" name="checkmark-outline"></ion-icon>
+        </div>
+        <div class="step-name">Metodo Pago</div>
+      </div>
+      <div class="stepper-item" [ngClass]="{ step: slideActive == 2, finish: slideActive > 2 }">
+        <div class="step-counter">
+          <ion-icon class="step-icon" name="checkmark-outline"></ion-icon>
+        </div>
+        <div class="step-name">Finalizado</div>
+      </div>
+    </div>
+  </div>
+
+  <swiper [config]="swiperOptions" (swiper)="setSwiperInstance($event)" >
+    <ng-template swiperSlide style="display: block;">
+      <ion-grid>
+        <ion-row class="book-appointment">
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header style="padding: 0.5rem;">
+                <ion-card-title>Mayo, 2022</ion-card-title>
+              </ion-card-header>
+              <ion-card-content style="padding: 0.5rem;">
+                <ion-grid>
+                  <ion-row>
+                    <div class="dates">
+                        <div [id]="'day-'+day.id" class="day" *ngFor="let day of daysOfMothSelected" [ngClass]="{active: day.selected, disabled: day.disabled}" (click)="handleDateButton(day)">
+                          <div class="day-name">{{ day.dayName }}</div>
+                          <div class="day-number">{{ day.dayNumber }}</div>
+                        </div>
+                      </div>
+                  </ion-row>
+                </ion-grid>
+                      
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="avalible-slot">
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-header style="padding: 0.5rem 1rem;">
+                <ion-card-title>Espacio Disponible</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <div class="horas-disponibles">
+                  <div class="hora" *ngFor="let hora of hoursOfDaySelected; let i = index">
+                    <p>{{ hora.hour }}</p>
+                  </div>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button shape="round" expand="full" color="primary" (click)="handleNextStepOneButton()">Siguiente</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+    <ng-template swiperSlide>
+      <ion-grid >
+        <ion-row>
+          <ion-col>
+            <ion-button shape="round" expand="full" color="primary" (click)="handleNextStepTwoButton()">Siguiente</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+    <ng-template swiperSlide>
+      <ion-grid >
+        <ion-row>
+          <ion-col size="12">
+            <ion-button shape="round" expand="full" color="primary" (click)="handleFinishButton()">Reservar más citas</ion-button>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button shape="round" expand="full" color="primary" fill="outline" (click)="handleFinishButton()">Ir a mis citas</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+  </swiper>
+</ion-content>

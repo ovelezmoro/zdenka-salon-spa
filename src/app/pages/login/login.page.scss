@@ -1,0 +1,41 @@
+.login-form {
+  height: 100%;
+  background-color: white;
+  padding: 0;
+
+  .logo {
+    height: 35%;
+    background-color: var(--color-primary);
+  }
+  .logo-image::before {
+    content: "";
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    position: absolute;
+    border-radius: 2rem;
+    bottom: -25px;
+    left: 0;
+  }
+
+  ion-button {
+    --border-radius: 10px;
+    text-transform: none;
+    height: 2.5rem;
+    font-weight: bold;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 10px;
+    color: grey;
+    width: 100%;
+    p {
+      text-align: center;
+      span {
+        color: var(--color-primary);
+        font-weight: bold;
+      }
+    }
+  }
+}

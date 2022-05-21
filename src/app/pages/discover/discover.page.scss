@@ -1,0 +1,126 @@
+.welcome {
+  margin: 0;
+  padding: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  span.name {
+    color: var(--color-primary);
+  }
+}
+.street-info {
+  color: var(--ion-color-step-400);
+  font-size: 15px;
+  padding: 5px 0px;
+}
+
+.notification {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .notification-brage {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: absolute;
+    line-height: 4rem;
+    font-size: 1.5rem;
+
+    ion-badge {
+      position: absolute;
+      top: 6px;
+      right: 3px;
+      z-index: 99;
+      border-radius: 50%;
+    }
+  }
+}
+
+.services {
+  width: 100%;
+  overflow: overlay;
+  display: -webkit-inline-box;
+  height: 8rem;
+  padding: 0.8rem 0;
+  .service-display {
+    width: 6.5rem;
+    display: inline-block;
+    float: left;
+    margin: 0;
+    .icon {
+      /* width: 4rem; */
+      /* height: 4rem; */
+      padding: 0.5rem;
+      text-align: center;
+      img {
+        width: 60%;
+      }
+    }
+    .name {
+      text-align: center;
+      font-size: 1rem;
+      padding: 0 0.5rem;
+      color: #ff8306;
+    }
+  }
+}
+
+.titulo-seccion {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.discoer-services-populars ion-card-content {
+  padding-left: 5rem;
+  background-image: url("https://i.pravatar.cc/300");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  .description {
+    margin-left: 1rem;
+  }
+
+  p.name {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--ion-text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span.price {
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: var(--color-primary);
+  }
+
+  ion-checkbox {
+    position: absolute;
+    top: 30%;
+    right: 6%;
+  }
+}
+
+.book-appointment {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 99;
+
+  ion-button {
+    --border-radius: 10px;
+    text-transform: none;
+  }
+
+  .custom {
+    --border-top-left-radius: 10%;
+    --border-top-right-radius: 30%;
+    --border-bottom-left-radius: 50%;
+    --border-bottom-right-radius: 70%;
+
+    --border-radius: var(--border-top-left-radius)
+      var(--border-top-right-radius) var(--border-bottom-right-radius)
+      var(--border-bottom-left-radius);
+  }
+}
