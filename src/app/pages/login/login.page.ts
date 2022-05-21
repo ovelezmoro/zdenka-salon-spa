@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
   }
 
   handleLoginButton(){
-    this.router.navigate(['/tabs'])
+    this.router.navigate(['/app/'])
   }
 
   handleRegisterButton(){
