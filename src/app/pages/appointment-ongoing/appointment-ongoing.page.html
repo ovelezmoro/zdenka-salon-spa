@@ -1,0 +1,41 @@
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-datetime style="margin: 0 auto;" #popoverDatetime locale="es-ES" [min]="calendarMinDate" presentation="date" firstDayOfWeek="1"
+          (ionChange)="handleChangeDate(popoverDatetime.value)"></ion-datetime>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list class="history-layout" lines="none" *ngFor="let ongoing of ongoings">
+          <ion-item>
+            <img [src]="ongoing.enterprise.avatar" alt="" class="avatar">
+            <ion-label>
+              <span class="enterprise-name">{{ ongoing.enterprise.name }}</span>
+              <p class="enterprise-address"> {{ ongoing.enterprise.address }} </p>
+            </ion-label>
+          </ion-item>
+          <hr class="divisor">
+          <ion-item>
+            <ion-label class="service-name">
+              <div style="margin:0.5rem 0; font-size: 1rem;">{{ ongoing.service.name }}
+                <span class="hour">{{ ongoing.hour.range }}</span>
+              </div>
+              <p class="history-date">{{ ongoing.date }}</p>
+            </ion-label>
+          </ion-item>
+          <hr class="divisor">
+          <!--<ion-item (click)="handleActionQRCodeButton(ongoing)">
+              <ion-icon slot="start" name="barcode" color="primary"></ion-icon>
+              <ion-label>Código QR</ion-label>
+              <ion-icon slot="end" name="chevron-forward-outline" color="medium"></ion-icon>
+          </ion-item>-->
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

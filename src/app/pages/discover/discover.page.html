@@ -5,34 +5,35 @@
         <div class="welcome">
           Hola, <span class="name">Osmar</span>
           <div class="street-info">
-            <ion-icon name="compass-outline"></ion-icon> Jr. Monterrey 258, Santiago de Surco 15038 - Centro Comercial Caminos Del Inca
-
+            <ion-icon name="compass-outline"></ion-icon>
+            {{ enterpriseSelected.name }}
+            <br>{{ enterpriseSelected.address }}
           </div>
         </div>
       </ion-col>
       <ion-col size="2">
         <div class="notification">
-          <div class="notification-brage">
+          <!--<div class="notification-brage">
             <ion-badge color="primary">11</ion-badge>
             <ion-icon name="notifications-outline"></ion-icon>
-          </div>
+          </div>-->
         </div>
       </ion-col>
     </ion-row>
-    <ion-row style="padding: 0.5rem;">
+    <!--<ion-row style="padding: 0.5rem;">
       <ion-searchbar
         placeholder="Buscar servicio o especialista..."
       ></ion-searchbar>
-    </ion-row>
+    </ion-row>-->
     <ion-row style="padding: 0.5rem;">
       <div class="services">
-        <div class="service-display">
+        <div class="service-display" (click)="handleFilterByCategories(null)">
           <div class="icon">
             <img src="assets/images/hair-salon.png" alt="" srcset="" />
           </div>
           <div class="name">Todos</div>
         </div>
-        <div class="service-display" *ngFor="let categorie of categories">
+        <div class="service-display" *ngFor="let categorie of categories" (click)="handleFilterByCategories(categorie)">
           <div class="icon">
             <img [src]="'assets/images/'+categorie.logo" alt="" srcset="" />
           </div>
@@ -42,7 +43,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="12"
-        ><div class="titulo-seccion">Servicios</div></ion-col
+        ><div class="titulo-seccion">Servicios <span *ngIf="categorieFilter">{{ categorieFilter.name }}</span></div></ion-col
       >
     </ion-row>
     <ion-row>

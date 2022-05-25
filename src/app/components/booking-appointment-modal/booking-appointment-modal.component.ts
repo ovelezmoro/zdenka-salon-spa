@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import * as moment from 'moment';
+import { RestService } from 'src/app/services/rest.service';
 import { SwiperOptions } from 'swiper';
 
 declare var $: any;
@@ -18,7 +19,8 @@ export class BookingAppointmentModalComponent implements OnInit, AfterViewInit {
   public swiper: any;
   public slideActive: number = 0;
   public requiredHours = 1.5;
-  public slotsAvaliables
+  public slotsAvaliables;
+  public bookingAppointment;
 
   public swiperOptions: SwiperOptions = {
     slidesPerView: 1,
@@ -28,8 +30,10 @@ export class BookingAppointmentModalComponent implements OnInit, AfterViewInit {
   public daysOfMothSelected: any[] = [];
 
   public hoursOfDaySelected: any[];
+  @Input() services: any[];
 
-  constructor(private _modalCtrl: ModalController) {
+
+  constructor(private _modalCtrl: ModalController, private _rest: RestService) {
     moment.locale('es');
     this.daySelected = moment();
     Array(this.daySelected.daysInMonth())
@@ -45,6 +49,7 @@ export class BookingAppointmentModalComponent implements OnInit, AfterViewInit {
           disabled: index + 1 < moment().date()
         });
       });
+
     //10:00am a 9:00pm (11hrs)
 
     this.hoursOfDaySelected = Array(11).fill(10).map((value, index) => {
@@ -78,7 +83,7 @@ export class BookingAppointmentModalComponent implements OnInit, AfterViewInit {
   }
 
   handleDateButton(day) {
-    if(!day.disabled) {
+    if (!day.disabled) {
       this.daysOfMothSelected.map((date) => {
         date.selected = false;
         return date;
@@ -89,9 +94,9 @@ export class BookingAppointmentModalComponent implements OnInit, AfterViewInit {
   }
 
   handleScrollLeftAnimateToDay(day) {
-    if(day != null) {
+    if (day != null) {
       const active = $(`#day-${day.id}`);
-      const activeWidth = active.width() / 2; 
+      const activeWidth = active.width() / 2;
       const pos = active.position().left + activeWidth; //get left position of active li + center position
       const elpos = $('.dates').scrollLeft(); // get current scroll position
       const elW = $('.dates').width(); //get div width
@@ -103,12 +108,29 @@ export class BookingAppointmentModalComponent implements OnInit, AfterViewInit {
 
   setSwiperInstance(swiper: any) {
     this.swiper = swiper;
-    console.log(this.swiper);
   }
 
   handleNextStepOneButton() {
+    console.log(this.services);
+    const services = this.services.map((service) => {
+      const hour = service.hours.find((hour) => {return hour.selected})
+      service.hour = hour;
+      service.date = this.daySelected.format("MMM DD, YYYY");
+      return service; 
+    });
+
+    this.bookingAppointment = {
+      enterprise: this._rest.getEnterpriseSelected(),
+      services: services, 
+    }
+
+    console.log(this.bookingAppointment);
+
     this.slideActive = 1;
     this.swiper.slideNext();
+    $('.swiper ').animate({
+      scrollTop: 0
+    }, 20);
   }
 
   handleNextStepTwoButton() {
@@ -118,5 +140,26 @@ export class BookingAppointmentModalComponent implements OnInit, AfterViewInit {
 
   handleFinishButton() {
     //TODO: MOSTRAR ALERTA DE CONFIRMACIÓN
+    this._modalCtrl.dismiss({
+      finish: true,
+      goToOngoing: false
+    })
   }
+
+  handleFinishButtonGoToOngoing() {
+    this._modalCtrl.dismiss({
+      finish: true,
+      goToOngoing: true
+    })
+  }
+
+  handleOnSelectHour(service, hour, i) {
+    service.hours.forEach(value => {
+      value.selected = false;
+    });
+    hour.selected = true;
+  }
+
+
+
 }

@@ -14,12 +14,30 @@ export class DiscoverPage implements OnInit {
   public services: any[] = [];
   public servicesSelected: any[] = [];
   public isModalOpen: boolean = false;
+  public categorieFilter: any;
+  public enterprises: any[];
+  public enterpriseSelected: any[];
   constructor(private _rest: RestService, private router: Router, public modalController: ModalController) {
     this.services = this._rest.getServices();
     this.categories = this._rest.getCategories();
+    this.enterprises = this._rest.getEnterprises();
+    this.enterpriseSelected = this.enterprises[0];
+    this._rest.setEnterpriseSelected(this.enterpriseSelected);
   }
 
   ngOnInit() {
+  }
+
+  handleFilterByCategories(categorie) {
+    this.categorieFilter = categorie;
+    if(categorie != null) {
+      this.services = this._rest.getServices().filter((value) => {
+        return value.categorieId == categorie.id
+      })
+    }else {
+      this.services = this._rest.getServices();
+    }
+
   }
 
   handleOnSelectService(service: any){
@@ -37,12 +55,29 @@ export class DiscoverPage implements OnInit {
   }
 
   async handleActionBookAppointmentButton() {
-    console.log(this.servicesSelected);
     if(this.servicesSelected.length) {
+      this.servicesSelected.map((value) => {
+        value.hours = this._rest.getTimeTable(value);
+      });
+      console.log(this.servicesSelected)
       const modal = await this.modalController.create({
         component: BookingAppointmentModalComponent,
-        cssClass: 'discover-modal'
+        cssClass: 'discover-modal',
+        componentProps: {
+          services: this.servicesSelected
+        }
       });
+      modal.onDidDismiss().then((value) => {
+        if(value.data.finish) {
+          this.servicesSelected = [];
+          this.services.forEach((service) => {
+            service.selected = false;
+          });
+        }
+        if(value.data.goToOngoing) {
+          this.router.navigate(['/app/appointment/appointment-ongoing'])
+        }
+      })
       return await modal.present();
     }
   }

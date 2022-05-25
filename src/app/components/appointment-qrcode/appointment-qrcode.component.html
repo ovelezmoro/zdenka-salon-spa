@@ -1,0 +1,80 @@
+<ion-content>
+  <ion-grid style="height: 100%; background-color: white;">
+    <ion-row size="12" style="font-size: 1.5rem;
+    padding: 0 1rem;
+    margin: 1rem 0;">
+      <ion-icon class="back-button" name="arrow-back-outline" (click)="handleBackButton()"></ion-icon>
+    </ion-row>
+    <!--<ion-row>
+      <ion-col size="12">
+        <h1 style="margin: 0 0 1.5rem 0; font-weight: bold; text-align: center;">Crear nueva Cuenta</h1>
+      </ion-col>
+    </ion-row>-->
+    <ion-row class="profile">
+      <ion-col class="name-section" size="12">
+        <img class="profile-image" [src]="ongoing.enterprise.avatar" alt="" srcset="">
+        <h2>{{ ongoing.enterprise.name }}</h2>
+        <p>{{ ongoing.enterprise.address }}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list lines="none">
+          <ion-item style="text-align: center; font-size: 2rem;">
+            <ion-label>{{ ongoing.service.name }}</ion-label>
+          </ion-item>
+          <ion-item style="text-align: center; color: orange; font-size: 2rem; font-weight: bold;">
+            <ion-label>{{ ongoing.hour.range }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ngx-qrcode elementType="url" [value]="'ongoing' + ongoing.id" cssClass="qr-code" [scale]='20'
+              errorCorrectionLevel="L">
+            </ngx-qrcode>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
+
+<!-- <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list class="history-layout" lines="none">
+          <ion-item style="text-align: center;">
+            <img [src]="ongoing.enterprise.avatar" alt="" class="avatar" style="width: 40%; border-radius: 50%;">
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <span class="enterprise-name">{{ ongoing.enterprise.name }}</span>
+              <p class="enterprise-address"> {{ ongoing.enterprise.address }} </p>
+            </ion-label>
+          </ion-item>
+          <hr class="divisor">
+          <ion-item>
+            <ion-label class="service-name">
+              <div style="margin:0.5rem 0; font-size: 1rem;">{{ ongoing.service.name }}
+                <span class="hour">{{ ongoing.hour.range }}</span>
+              </div>
+              <p class="history-date">{{ ongoing.date }}</p>
+            </ion-label>
+          </ion-item>
+          <hr class="divisor">
+          <ion-item>
+            <ngx-qrcode 
+            elementType="url" 
+            [value]="'ongoing' + ongoing.id"
+            cssClass="qr-code"
+            [scale]='20'
+            errorCorrectionLevel="L">
+          </ngx-qrcode>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+-->

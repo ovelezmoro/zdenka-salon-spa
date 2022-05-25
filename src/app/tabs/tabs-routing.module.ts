@@ -15,6 +15,14 @@ const routes: Routes = [
         loadChildren: () => import('../pages/profile/profile.module').then(m => m.ProfilePageModule)
       },
       {
+        path: 'local',
+        loadChildren: () => import('../pages/local/local.module').then(m => m.LocalPageModule)
+      },
+      {
+        path: 'appointment',
+        loadChildren: () => import('../pages/appointment/appointment.module').then(m => m.AppointmentPageModule)
+      },
+      {
         path: '',
         redirectTo: '/app/discover',
         pathMatch: 'full'

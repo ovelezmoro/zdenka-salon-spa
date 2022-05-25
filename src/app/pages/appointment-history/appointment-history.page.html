@@ -1,0 +1,34 @@
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list class="history-layout" lines="none" *ngFor="let history of histories">
+          <ion-item>
+            <img [src]="history.enterprise.avatar" alt="" class="avatar">
+            <ion-label><span class="enterprise-name">{{ history.enterprise.name }}</span>
+              <p class="enterprise-address"> {{ history.enterprise.address }} </p>
+            </ion-label>
+          </ion-item>
+          <hr class="divisor">
+          <ion-item>
+            <ion-label class="service-name">
+              {{ history.service.name }}
+              <p class="history-date">{{ history.date }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <div class="stars-content">
+              <div *ngFor="let star of stars; let i = index" class="stars" (click)="handleUploadStar(history, i + 1)">
+                <h1>
+                  <ion-icon [name]="history.stars <= i  ? 'star-outline' : 'star' " color="primary" ></ion-icon>
+                </h1>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,7 +1,7 @@
-<ion-content>
+<ion-content id="booking-appointment-modal">
   <div style="    background-color: white;
   padding-bottom: 0.3rem;
-  border-bottom: 1px solid #80808059;">
+  border-bottom: 1px solid #80808059; height: 25%;">
     <ion-toolbar class="toolbar">
       <ion-buttons slot="start" (click)="handleBackButton()">
         <ion-icon class="back-button" name="arrow-back-outline"></ion-icon>
@@ -16,13 +16,13 @@
         </div>
         <div class="step-name">Reservar Cita</div>
       </div>
-      <div class="stepper-item" [ngClass]="{ step: slideActive == 1, finish: slideActive > 1 }">
+      <!--<div class="stepper-item" [ngClass]="{ step: slideActive == 1, finish: slideActive > 1 }">
         <div class="step-counter">
           <ion-icon class="step-icon" name="checkmark-outline"></ion-icon>
         </div>
         <div class="step-name">Metodo Pago</div>
-      </div>
-      <div class="stepper-item" [ngClass]="{ step: slideActive == 2, finish: slideActive > 2 }">
+      </div>-->
+      <div class="stepper-item" [ngClass]="{ step: slideActive == 1, finish: slideActive > 1 }">
         <div class="step-counter">
           <ion-icon class="step-icon" name="checkmark-outline"></ion-icon>
         </div>
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <swiper [config]="swiperOptions" (swiper)="setSwiperInstance($event)" >
+  <swiper [config]="swiperOptions" (swiper)="setSwiperInstance($event)" style="overflow: auto;height: 75%;">
     <ng-template swiperSlide style="display: block;">
       <ion-grid>
         <ion-row class="book-appointment">
@@ -44,14 +44,15 @@
                 <ion-grid>
                   <ion-row>
                     <div class="dates">
-                        <div [id]="'day-'+day.id" class="day" *ngFor="let day of daysOfMothSelected" [ngClass]="{active: day.selected, disabled: day.disabled}" (click)="handleDateButton(day)">
-                          <div class="day-name">{{ day.dayName }}</div>
-                          <div class="day-number">{{ day.dayNumber }}</div>
-                        </div>
+                      <div [id]="'day-'+day.id" class="day" *ngFor="let day of daysOfMothSelected"
+                        [ngClass]="{active: day.selected, disabled: day.disabled}" (click)="handleDateButton(day)">
+                        <div class="day-name">{{ day.dayName }}</div>
+                        <div class="day-number">{{ day.dayNumber }}</div>
                       </div>
+                    </div>
                   </ion-row>
                 </ion-grid>
-                      
+
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -59,16 +60,34 @@
 
         <ion-row class="avalible-slot">
           <ion-col size="12">
-            <ion-card>
-              <ion-card-header style="padding: 0.5rem 1rem;">
-                <ion-card-title>Espacio Disponible</ion-card-title>
-              </ion-card-header>
-              <ion-card-content>
-                <div class="horas-disponibles">
-                  <div class="hora" *ngFor="let hora of hoursOfDaySelected; let i = index">
-                    <p>{{ hora.hour }}</p>
-                  </div>
+            <ion-card *ngFor="let service of services" class="discoer-services-populars">
+              <ion-card-content class="service" style="  background-image: url('https://i.pravatar.cc/300')">
+                <div class="description">
+                  <ion-row>
+                    <ion-col size="12">
+                      <p class="name">{{ service.name }}</p>
+                      <p class="precio">
+                        {{ service.time }} Min -
+                        <span class="price">S/ {{ service.price }}</span>
+                      </p>
+                    </ion-col>
+                  </ion-row>
                 </div>
+              </ion-card-content>
+              <ion-card-content>
+                <h2>Horarios Disponibles {{ service.hours.length }}</h2>
+                <ion-grid>
+                  <ion-row>
+                      <ion-col 
+                          size="6" 
+                          class="hours" 
+                          *ngFor="let hour of service.hours; let i = index"
+                          (click)="handleOnSelectHour(service, hour, i)"
+                          >
+                        <div class="hour-text" [ngClass]="{active: hour.selected}" *ngIf="service.hours[i+1]">{{ hour.range }} - {{ service.hours[i+1]?.range }}</div>
+                      </ion-col>
+                  </ion-row>
+                </ion-grid>
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -76,28 +95,68 @@
 
         <ion-row>
           <ion-col>
-            <ion-button shape="round" expand="full" color="primary" (click)="handleNextStepOneButton()">Siguiente</ion-button>
+            <ion-button shape="round" expand="full" color="primary" (click)="handleNextStepOneButton()">Confirmar
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ng-template>
     <ng-template swiperSlide>
-      <ion-grid >
-        <ion-row>
-          <ion-col>
-            <ion-button shape="round" expand="full" color="primary" (click)="handleNextStepTwoButton()">Siguiente</ion-button>
+      <ion-grid>
+
+        <!--<ion-row *ngIf="bookingAppointment">
+          <ion-col size="12">
+            <ion-list class="history-layout" lines="none">
+              <ion-item>
+                <img [src]="bookingAppointment.enterprise.avatar" alt="" class="avatar">
+                <ion-label>
+                  <span class="enterprise-name">{{ bookingAppointment.enterprise.name }}</span>
+                  <p class="enterprise-address"> {{ bookingAppointment.enterprise.address }} </p>
+                </ion-label>
+              </ion-item>
+              <hr class="divisor">
+              <ion-item *ngFor="let service of bookingAppointment.services">
+                <ion-label class="service-name">
+                  <div style="margin:0.5rem 0; font-size: 1rem;">{{ service.name }}
+                    <span class="hour">{{ service.hour.range }}</span>
+                  </div>
+                  <p class="history-date">{{ service.date }}</p>
+                </ion-label>
+              </ion-item>
+              <hr class="divisor">
+            </ion-list>
+          </ion-col>
+        </ion-row>-->
+
+        <ion-row *ngIf="bookingAppointment">
+          <ion-col size="12">
+            <ion-list lines="none">
+              <ion-item>
+                <ion-label style="font-weight: bold;">{{ bookingAppointment.enterprise.name }}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label style="color: grey;">{{ bookingAppointment.enterprise.address }}</ion-label>
+              </ion-item>
+              <hr style="background-color: #d1d1d1; width: 95%;">
+              <ion-item *ngFor="let service of bookingAppointment.services">
+                <ion-label style="font-weight: bold; font-size: 1.2rem;">{{ service.name }}</ion-label>
+                <ion-note slot="end" color="primary" style="font-size: 1rem; font-weight: bold;">
+                  <p style="margin-top: 0; text-transform: capitalize;">{{ service.date }}</p>
+                  <p style="margin-bottom: 0;">{{ service.hour.range }}</p>
+                </ion-note>
+              </ion-item>
+            </ion-list>
           </ion-col>
         </ion-row>
-      </ion-grid>
-    </ng-template>
-    <ng-template swiperSlide>
-      <ion-grid >
+
         <ion-row>
           <ion-col size="12">
-            <ion-button shape="round" expand="full" color="primary" (click)="handleFinishButton()">Reservar más citas</ion-button>
+            <ion-button shape="round" expand="full" color="primary" (click)="handleFinishButton()">Reservar más citas
+            </ion-button>
           </ion-col>
           <ion-col size="12">
-            <ion-button shape="round" expand="full" color="primary" fill="outline" (click)="handleFinishButton()">Ir a mis citas</ion-button>
+            <ion-button shape="round" expand="full" color="primary" fill="outline" (click)="handleFinishButtonGoToOngoing()">Ir a
+              mis citas</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

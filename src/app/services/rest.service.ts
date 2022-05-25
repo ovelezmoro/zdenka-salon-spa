@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RestService {
-  constructor() {}
+  constructor(public _loadingCtrl: LoadingController) {
+    this.setEnterpriseSelected(this.enterprises[0])
+  }
+  private enterpriseSelected: any;
 
-  enterprise: any[] = [
+  private enterprises: any[] = [
     {
       id: 1,
       name: 'Zdenka Salon & Spa',
       state: 'A',
-      direction:
+      address:
         'Jr. Monterrey 258, Santiago de Surco 15038 - Centro Comercial Caminos Del Inca ',
       phone: '+51 942 388 846',
       website: 'https://www.facebook.com/profile.php?id=100069770957901',
-      latitude: null,
-      longitude: null,
+      latitude: -12.1125924,
+      longitude: -76.9911679,
+      avatar: 'assets/empresas/zdenka.jpg'
     },
   ];
-  categories: any[] = [
+  private categories: any[] = [
     {
       id: 1,
       name: 'Color',
@@ -30,13 +35,13 @@ export class RestService {
       id: 2,
       name: 'Tratamiento',
       state: 'A',
-      logo: 'hair-dye.png',
+      logo: 'beauty-treatment.png',
     },
     {
       id: 3,
       name: 'Peinados',
       state: 'A',
-      logo: 'hair-dye.png',
+      logo: 'beauty.png',
     },
     {
       id: 4,
@@ -48,13 +53,13 @@ export class RestService {
       id: 5,
       name: 'Rostro',
       state: 'A',
-      logo: 'hair-dye.png',
+      logo: 'face-mask.png',
     },
     {
       id: 6,
       name: 'Pestañas',
       state: 'A',
-      logo: 'hair-dye.png',
+      logo: 'eyelash-curler.png',
     },
     {
       id: 7,
@@ -72,7 +77,7 @@ export class RestService {
       id: 9,
       name: 'Manicure',
       state: 'A',
-      logo: 'hair-dye.png',
+      logo: 'nail-polish.png',
     },
     {
       id: 10,
@@ -81,10 +86,10 @@ export class RestService {
       logo: 'hair-dye.png',
     },
   ];
-  servicios: any[] = [
+  private services: any[] = [
     {
       id: 1,
-      id_categoria: 1,
+      categorieId: 1,
       name: 'Mechas balayage',
       price: 240,
       time: 30,
@@ -94,7 +99,7 @@ export class RestService {
     },
     {
       id: 2,
-      id_categoria: 1,
+      categorieId: 1,
       name: 'Mechas tradicionales',
       price: 200,
       time: 30,
@@ -104,7 +109,7 @@ export class RestService {
     },
     {
       id: 3,
-      id_categoria: 1,
+      categorieId: 1,
       name: 'lluminación',
       price: 180,
       time: 30,
@@ -114,7 +119,7 @@ export class RestService {
     },
     {
       id: 4,
-      id_categoria: 1,
+      categorieId: 1,
       name: 'Shade Redken',
       price: 120,
       time: 30,
@@ -124,7 +129,7 @@ export class RestService {
     },
     {
       id: 5,
-      id_categoria: 1,
+      categorieId: 1,
       name: 'Tinte raíz Redken',
       price: 120,
       time: 30,
@@ -134,7 +139,7 @@ export class RestService {
     },
     {
       id: 6,
-      id_categoria: 1,
+      categorieId: 1,
       name: 'Tinte raíz',
       price: 90,
       time: 30,
@@ -144,7 +149,7 @@ export class RestService {
     },
     {
       id: 7,
-      id_categoria: 2,
+      categorieId: 2,
       name: 'Intenso',
       price: 80,
       time: 60,
@@ -154,7 +159,7 @@ export class RestService {
     },
     {
       id: 8,
-      id_categoria: 2,
+      categorieId: 2,
       name: 'Moroccanoil',
       price: 120,
       time: 60,
@@ -164,7 +169,7 @@ export class RestService {
     },
     {
       id: 9,
-      id_categoria: 2,
+      categorieId: 2,
       name: 'Biotop',
       price: 120,
       time: 60,
@@ -174,7 +179,7 @@ export class RestService {
     },
     {
       id: 10,
-      id_categoria: 2,
+      categorieId: 2,
       name: 'Acidic Bonding Concentrate Redken',
       price: 120,
       time: 60,
@@ -184,7 +189,7 @@ export class RestService {
     },
     {
       id: 11,
-      id_categoria: 3,
+      categorieId: 3,
       name: 'Peinado',
       price: 80,
       time: 30,
@@ -194,7 +199,7 @@ export class RestService {
     },
     {
       id: 12,
-      id_categoria: 3,
+      categorieId: 3,
       name: 'Moño',
       price: 100,
       time: 30,
@@ -204,7 +209,7 @@ export class RestService {
     },
     {
       id: 13,
-      id_categoria: 3,
+      categorieId: 3,
       name: 'Corte de damas',
       price: 80,
       time: 30,
@@ -214,7 +219,7 @@ export class RestService {
     },
     {
       id: 14,
-      id_categoria: 3,
+      categorieId: 3,
       name: 'Corte de caballero',
       price: 50,
       time: 30,
@@ -224,7 +229,7 @@ export class RestService {
     },
     {
       id: 15,
-      id_categoria: 3,
+      categorieId: 3,
       name: 'Cepillado',
       price: 40,
       time: 30,
@@ -234,7 +239,7 @@ export class RestService {
     },
     {
       id: 16,
-      id_categoria: 3,
+      categorieId: 3,
       name: 'Planchado',
       price: 40,
       time: 30,
@@ -244,7 +249,7 @@ export class RestService {
     },
     {
       id: 17,
-      id_categoria: 4,
+      categorieId: 4,
       name: 'Botox Capilar',
       price: 200,
       time: 30,
@@ -254,7 +259,7 @@ export class RestService {
     },
     {
       id: 18,
-      id_categoria: 4,
+      categorieId: 4,
       name: 'Alisado brasilero',
       price: 300,
       time: 30,
@@ -264,7 +269,7 @@ export class RestService {
     },
     {
       id: 19,
-      id_categoria: 4,
+      categorieId: 4,
       name: 'Laceado japonés',
       price: 350,
       time: 30,
@@ -274,7 +279,7 @@ export class RestService {
     },
     {
       id: 20,
-      id_categoria: 4,
+      categorieId: 4,
       name: 'Photohair',
       price: 400,
       time: 30,
@@ -284,7 +289,7 @@ export class RestService {
     },
     {
       id: 21,
-      id_categoria: 5,
+      categorieId: 5,
       name: 'Maquillaje clásico',
       price: 120,
       time: 30,
@@ -294,7 +299,7 @@ export class RestService {
     },
     {
       id: 22,
-      id_categoria: 5,
+      categorieId: 5,
       name: 'Maquillaje de quinceañera',
       price: 150,
       time: 30,
@@ -304,7 +309,7 @@ export class RestService {
     },
     {
       id: 23,
-      id_categoria: 5,
+      categorieId: 5,
       name: 'Maquillaje de novia',
       price: 250,
       time: 30,
@@ -314,7 +319,7 @@ export class RestService {
     },
     {
       id: 24,
-      id_categoria: 5,
+      categorieId: 5,
       name: 'Limpieza de cutis clásica',
       price: 100,
       time: 30,
@@ -324,7 +329,7 @@ export class RestService {
     },
     {
       id: 25,
-      id_categoria: 5,
+      categorieId: 5,
       name: 'Limpieza profunda',
       price: 130,
       time: 30,
@@ -334,7 +339,7 @@ export class RestService {
     },
     {
       id: 26,
-      id_categoria: 5,
+      categorieId: 5,
       name: 'Planchado de cejas',
       price: 50,
       time: 30,
@@ -344,7 +349,7 @@ export class RestService {
     },
     {
       id: 27,
-      id_categoria: 5,
+      categorieId: 5,
       name: 'Pigmentación de cejas',
       price: 30,
       time: 30,
@@ -354,7 +359,7 @@ export class RestService {
     },
     {
       id: 28,
-      id_categoria: 6,
+      categorieId: 6,
       name: '1x1',
       price: 50,
       time: 30,
@@ -364,7 +369,7 @@ export class RestService {
     },
     {
       id: 29,
-      id_categoria: 6,
+      categorieId: 6,
       name: 'Tira',
       price: 40,
       time: 30,
@@ -374,7 +379,7 @@ export class RestService {
     },
     {
       id: 30,
-      id_categoria: 6,
+      categorieId: 6,
       name: 'Extensiones',
       price: 200,
       time: 30,
@@ -384,7 +389,7 @@ export class RestService {
     },
     {
       id: 31,
-      id_categoria: 6,
+      categorieId: 6,
       name: 'Rizado permanente',
       price: 55,
       time: 30,
@@ -394,7 +399,7 @@ export class RestService {
     },
     {
       id: 32,
-      id_categoria: 6,
+      categorieId: 6,
       name: 'Lifting',
       price: 70,
       time: 30,
@@ -404,7 +409,7 @@ export class RestService {
     },
     {
       id: 33,
-      id_categoria: 7,
+      categorieId: 7,
       name: 'Frente',
       price: 25,
       time: 30,
@@ -414,7 +419,7 @@ export class RestService {
     },
     {
       id: 34,
-      id_categoria: 7,
+      categorieId: 7,
       name: 'Cejas',
       price: 20,
       time: 30,
@@ -424,7 +429,7 @@ export class RestService {
     },
     {
       id: 35,
-      id_categoria: 7,
+      categorieId: 7,
       name: 'Patillas',
       price: 25,
       time: 30,
@@ -434,7 +439,7 @@ export class RestService {
     },
     {
       id: 36,
-      id_categoria: 7,
+      categorieId: 7,
       name: 'Bozo',
       price: 15,
       time: 30,
@@ -444,7 +449,7 @@ export class RestService {
     },
     {
       id: 37,
-      id_categoria: 7,
+      categorieId: 7,
       name: 'Mentón',
       price: 15,
       time: 30,
@@ -454,7 +459,7 @@ export class RestService {
     },
     {
       id: 38,
-      id_categoria: 7,
+      categorieId: 7,
       name: 'Rostro',
       price: 60,
       time: 30,
@@ -464,7 +469,7 @@ export class RestService {
     },
     {
       id: 39,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Cejas',
       price: 20,
       time: 30,
@@ -474,7 +479,7 @@ export class RestService {
     },
     {
       id: 40,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Patillas',
       price: 25,
       time: 30,
@@ -484,7 +489,7 @@ export class RestService {
     },
     {
       id: 41,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Bozo',
       price: 15,
       time: 30,
@@ -494,7 +499,7 @@ export class RestService {
     },
     {
       id: 42,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Mentón',
       price: 15,
       time: 30,
@@ -504,7 +509,7 @@ export class RestService {
     },
     {
       id: 43,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Rostro',
       price: 60,
       time: 30,
@@ -514,7 +519,7 @@ export class RestService {
     },
     {
       id: 44,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Axila',
       price: 20,
       time: 30,
@@ -524,7 +529,7 @@ export class RestService {
     },
     {
       id: 45,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Brazos',
       price: 35,
       time: 30,
@@ -534,7 +539,7 @@ export class RestService {
     },
     {
       id: 46,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Brazos 1/2',
       price: 25,
       time: 30,
@@ -544,7 +549,7 @@ export class RestService {
     },
     {
       id: 47,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Espalda',
       price: 55,
       time: 30,
@@ -554,7 +559,7 @@ export class RestService {
     },
     {
       id: 48,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Espalda lumbar',
       price: 30,
       time: 30,
@@ -564,7 +569,7 @@ export class RestService {
     },
     {
       id: 49,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Pierna',
       price: 60,
       time: 30,
@@ -574,7 +579,7 @@ export class RestService {
     },
     {
       id: 50,
-      id_categoria: 8,
+      categorieId: 8,
       name: '½Pierna superior',
       price: 35,
       time: 30,
@@ -584,7 +589,7 @@ export class RestService {
     },
     {
       id: 51,
-      id_categoria: 8,
+      categorieId: 8,
       name: '½Pierna inferior',
       price: 30,
       time: 30,
@@ -594,7 +599,7 @@ export class RestService {
     },
     {
       id: 52,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Abdomen',
       price: 30,
       time: 30,
@@ -604,7 +609,7 @@ export class RestService {
     },
     {
       id: 53,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Vientre',
       price: 30,
       time: 30,
@@ -614,7 +619,7 @@ export class RestService {
     },
     {
       id: 54,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Brasilera',
       price: 60,
       time: 30,
@@ -624,7 +629,7 @@ export class RestService {
     },
     {
       id: 55,
-      id_categoria: 8,
+      categorieId: 8,
       name: 'Bikini',
       price: 30,
       time: 30,
@@ -634,7 +639,7 @@ export class RestService {
     },
     {
       id: 56,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Gel',
       price: 45,
       time: 30,
@@ -644,7 +649,7 @@ export class RestService {
     },
     {
       id: 57,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'OPI',
       price: 20,
       time: 30,
@@ -654,7 +659,7 @@ export class RestService {
     },
     {
       id: 58,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Masglo',
       price: 20,
       time: 30,
@@ -664,7 +669,7 @@ export class RestService {
     },
     {
       id: 59,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Básica',
       price: 15,
       time: 30,
@@ -674,7 +679,7 @@ export class RestService {
     },
     {
       id: 60,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Tips',
       price: 35,
       time: 30,
@@ -684,7 +689,7 @@ export class RestService {
     },
     {
       id: 61,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Uñas Babyboomer',
       price: 120,
       time: 30,
@@ -694,7 +699,7 @@ export class RestService {
     },
     {
       id: 62,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Uñas esculpidas',
       price: 120,
       time: 30,
@@ -704,7 +709,7 @@ export class RestService {
     },
     {
       id: 63,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Uñas acrílicas-Acrigel-Gel',
       price: 80,
       time: 30,
@@ -714,7 +719,7 @@ export class RestService {
     },
     {
       id: 64,
-      id_categoria: 9,
+      categorieId: 9,
       name: 'Mantenimiento Uñas Acrilicas-Acrigel-Gel',
       price: 50,
       time: 30,
@@ -724,7 +729,7 @@ export class RestService {
     },
     {
       id: 65,
-      id_categoria: 10,
+      categorieId: 10,
       name: 'Gel',
       price: 55,
       time: 30,
@@ -734,7 +739,7 @@ export class RestService {
     },
     {
       id: 66,
-      id_categoria: 10,
+      categorieId: 10,
       name: 'OPI',
       price: 30,
       time: 30,
@@ -744,7 +749,7 @@ export class RestService {
     },
     {
       id: 67,
-      id_categoria: 10,
+      categorieId: 10,
       name: 'Masglo',
       price: 30,
       time: 30,
@@ -754,7 +759,7 @@ export class RestService {
     },
     {
       id: 68,
-      id_categoria: 10,
+      categorieId: 10,
       name: 'Básica',
       price: 30,
       time: 30,
@@ -763,7 +768,7 @@ export class RestService {
       is_popular: 'N',
     },
   ];
-  horarios: any[] = [
+  private hours: any[] = [
     {
       id_horario: 1,
       id_servicio: 1,
@@ -902,72 +907,175 @@ export class RestService {
     {
       id_horario: 28,
       id_servicio: 2,
-      range: '10:00',
+      range: '10:30',
     },
     {
       id_horario: 29,
       id_servicio: 2,
-      range: '11:00',
+      range: '11:30',
     },
     {
       id_horario: 30,
       id_servicio: 2,
-      range: '12:00',
+      range: '12:30',
     },
     {
       id_horario: 31,
       id_servicio: 2,
-      range: '13:00',
+      range: '13:30',
     },
     {
       id_horario: 32,
       id_servicio: 2,
-      range: '14:00',
+      range: '14:30',
     },
     {
       id_horario: 33,
       id_servicio: 2,
-      range: '15:00',
+      range: '15:30',
     },
     {
       id_horario: 34,
       id_servicio: 2,
-      range: '16:00',
+      range: '16:30',
     },
     {
       id_horario: 35,
       id_servicio: 2,
-      range: '17:00',
+      range: '17:30',
     },
     {
       id_horario: 36,
       id_servicio: 2,
-      range: '18:00',
+      range: '18:30',
     },
     {
       id_horario: 37,
       id_servicio: 2,
-      range: '19:00',
+      range: '19:30',
     },
     {
       id_horario: 38,
       id_servicio: 2,
-      range: '20:00',
+      range: '20:30',
     },
     {
       id_horario: 39,
       id_servicio: 2,
-      range: '21:00',
+      range: '21:30',
     },
     {
       id_horario: 40,
       id_servicio: 2,
-      range: '22:00',
+      range: '22:30',
     },
   ];
+  private profle: any = {
+    id: 1,
+    name: 'Osmar',
+    lastName: 'Velezmoro',
+    email: 'o.velezmoro@gmail.com',
+    phoneNumber: '+51 942832648',
+    birthDate: 'Jul 02, 2022',
+    avatar: 'https://i.pravatar.cc/300?img=69',
+    password: '******'
+  }
+  private histories: any[] = [
+    {
+      id: 1,
+      service: this.services[1],
+      enterprise: this.enterprises[0],
+      date: 'Abr 22, 2022',
+      stars: 0,
+    },{
+      id: 2,
+      service: this.services[2],
+      enterprise: this.enterprises[0],
+      date: 'May 02, 2022',
+      stars: 4,
+    },{
+      id: 3,
+      service: this.services[5],
+      enterprise: this.enterprises[0],
+      date: 'May 05, 2022',
+      stars: 2,
+    }
+  ]
+  private ongoings: any[] = [
+    {
+      id: 1,
+      service: this.services[1],
+      enterprise: this.enterprises[0],
+      hour: this.hours[2],
+      date: 'May 22, 2022',
+      dateFilter: '22-05-2022'
+    },
+    {
+      id: 2,
+      service: this.services[10],
+      enterprise: this.enterprises[0],
+      hour: this.hours[6],
+      date: 'May 23, 2022',
+      dateFilter: '23-05-2022'
+    },
+    {
+      id: 3,
+      service: this.services[10],
+      enterprise: this.enterprises[0],
+      hour: this.hours[8],
+      date: 'May 23, 2022',
+      dateFilter: '23-05-2022'
+    }
+  ];
+
+  private async presentLoading() {
+    const loading = await this._loadingCtrl.create({
+      cssClass: 'loading',
+      message: 'Por favor espere...',
+    });
+    await loading.present();
+    console.log('Loading dismissed!');
+  }
+
+  getTimeTable(service) {
+    return this.hours.filter((value) => {
+      return value.id_servicio == service.id
+    });
+  }
+
+  uploadStarsHistory(history, value) {
+    history.stars = value;
+    return history; 
+  }
+
+  getOngoings(date) {
+    return this.ongoings.filter((value) => {
+      return value.dateFilter == date;
+    });
+  }
+
+  getHistorial(): any[] {
+    return this.histories;
+  }
+
+  getEnterprises(): any[] {
+    return this.enterprises;
+  }
+
+  getEnterpriseSelected(): any {
+    return this.enterpriseSelected;
+  }
+
+  setEnterpriseSelected(enterprise): any {
+    this.enterpriseSelected = enterprise;
+  }
+
+  getProfile(): any {
+    return this.profle;
+  }
 
   getPopularServices(): any[] {
-    return this.servicios.filter((service) => {
+    return this.services.filter((service) => {
       return service.is_popular == 'S';
     });
   }
@@ -977,6 +1085,6 @@ export class RestService {
   }
 
   getServices() {
-    return this.servicios;
+    return this.services;
   }
 }

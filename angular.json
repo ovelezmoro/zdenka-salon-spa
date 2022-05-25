@@ -31,8 +31,11 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js", "node_modules/@popperjs/core/dist/umd/popper.min.js", "src/assets/bootstrap.min.js"],
+            "styles": ["src/theme/variables.scss", "src/global.scss", "node_modules/sweetalert2/src/sweetalert2.scss"],
+            "scripts": ["node_modules/jquery/dist/jquery.min.js", 
+              "node_modules/@popperjs/core/dist/umd/popper.min.js", 
+              "src/assets/bootstrap.min.js"
+              ],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

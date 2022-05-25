@@ -1,0 +1,39 @@
+.history-layout {
+    border-radius: 15px; margin: 0.5rem 0;
+    .avatar {
+        width: 28%;
+            border-radius: 15px;
+            margin: 0 1rem 0 0;
+    }
+    .enterprise-name {
+        font-weight: bold;
+    }
+    .enterprise-address {
+        margin: 0; font-weight: normal; color: grey
+    }
+    .divisor {
+        height: 1px;
+          background-color: #e5e5e5;
+          margin: 0.7rem 0.5rem;
+          border-radius: 15px;
+    }
+    .service-name {
+        font-weight: bold; margin: 0;
+    }
+    .history-date {
+        margin: 0; text-align: right; font-weight: bold;
+    }
+}
+
+.stars-content {
+    width: 100%;
+    .stars {
+        display: -webkit-inline-box;
+        float: left;
+        width: 20%;
+    h1 {
+        text-align: center;
+        width: 100%;
+    }
+    }
+}

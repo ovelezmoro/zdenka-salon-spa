@@ -20,6 +20,7 @@ ion-title {
   text-align: center;
   font-weight: bold;
 }
+
 ion-icon.back-button {
   font-size: 1.5rem;
   color: black;
@@ -35,6 +36,7 @@ ion-icon.back-button {
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
 .stepper-item {
   position: relative;
   display: flex;
@@ -65,24 +67,24 @@ ion-icon.back-button {
 }
 
 .stepper-item.finish::after {
-    position: absolute;
-    content: "";
-    border-bottom: 2px solid var(--color-primary);
-    width: 65%;
-    top: 12px;
-    left: 65%;
-    z-index: 2;
-  }
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid var(--color-primary);
+  width: 65%;
+  top: 12px;
+  left: 65%;
+  z-index: 2;
+}
 
 .stepper-item.finish {
-    .step-counter::before {
-      content: "";
-      background-color: var(--color-primary);
-      width: 10px;
-      height: 10px;
-      position: absolute;
-      border-radius: 50%;
-    }
+  .step-counter::before {
+    content: "";
+    background-color: var(--color-primary);
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+  }
 }
 
 .stepper-item {
@@ -139,6 +141,7 @@ ion-icon.back-button {
 .stepper-item:first-child::before {
   content: none;
 }
+
 .stepper-item:last-child::after {
   content: none;
 }
@@ -152,37 +155,42 @@ ion-icon.back-button {
     --border-radius: 10px;
     text-transform: none;
   }
+
   ion-card-title {
     color: var(--ion-text-color);
     font-weight: bold;
     font-size: 1rem;
   }
 
-  .dates::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+  .dates::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
   }
-  
+
   .dates {
     display: -webkit-inline-box;
     width: 100%;
     overflow: scroll;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-  
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+
     .day {
       width: 3rem;
     }
+
     .day.active .day-number {
       background-color: #ff8306;
       border-radius: 0.5rem;
       color: white;
     }
-  
+
     .day.disabled .day-number {
       border-radius: 0.5rem;
       color: #b8b8b8;
     }
-  
+
     .day-name {
       text-align: center;
       border-radius: 8px;
@@ -190,15 +198,18 @@ ion-icon.back-button {
       font-weight: bold;
       text-transform: capitalize;
     }
+
     .day-text {
       border: 1px solid #febd00;
       color: #febd00;
     }
+
     .day-number {
       color: var(--ion-text-color);
       font-weight: bold;
       padding: 0.6rem 0px;
-      font-size: 1.1rem;  }
+      font-size: 1.1rem;
+    }
   }
 
 }
@@ -217,9 +228,59 @@ ion-icon.back-button {
 
 .hora {
   display: inline-block;
-  width: 50%;
   float: left;
-  margin: 0;
+  display: inline-block;
+  width: 40%;
+  margin: 0.4rem 0.7rem;
+  border: 1px solid var(--color-primary);
+
+  p {
+    font-size: 15px;
+  }
 }
 
+.hour-text.active {
+  background-color: var(--color-primary);
+  color: white;
+  border: 1px solid var(--color-primary);
+}
+
+.hour-text {
+  border: 1px solid grey;
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.discoer-services-populars .service {
+  padding-left: 5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid #dbdada;
+
+  .description {
+    margin-left: 1rem;
+  }
+
+  p.name {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--ion-text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span.price {
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: var(--color-primary);
+  }
+
+  ion-checkbox {
+    position: absolute;
+    top: 30%;
+    right: 6%;
+  }
+}
 
